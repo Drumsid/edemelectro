@@ -173,3 +173,17 @@ function get_navigation() {
 
 	locate_template( $templates, true );
 }
+
+function load_styles_scripts() {
+
+	wp_enqueue_style('bootstrap', get_template_directory_uri().'/css/bootstrap.css');
+	wp_enqueue_style('style', get_template_directory_uri().'/css/style.css');
+	wp_enqueue_style('flexslider', get_template_directory_uri().'/css/flexslider.css');
+
+	wp_enqueue_script('bootstrap-3.1.1.min', get_template_directory_uri().'/js/bootstrap-3.1.1.min.js');
+	wp_enqueue_script('simpleCart', get_template_directory_uri().'/js/simpleCart.min.js');
+}
+
+add_action('wp_enqueue_scripts', 'load_styles_scripts');
+
+add_filter('woocommerce_enqueue_styles', '__return_empty_array');
