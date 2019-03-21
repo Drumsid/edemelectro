@@ -136,7 +136,7 @@ a.simpleCart_empty {
     color: #000;
     text-transform: uppercase;
     border: 1px solid #f8f8f8;
-	margin:0 10px;
+	margin:0 2px;
 	padding-top: 10px;
     padding-bottom: 10px;
 }
@@ -167,7 +167,7 @@ a.simpleCart_empty {
 }
 .navbar-header {
     float: left;
-    width: 35%;
+    /* width: 35%; */
 }
 ul.multi-column-dropdown h6 {
     font-size: 14px;

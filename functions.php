@@ -246,18 +246,8 @@ register_nav_menus( array(
 	'top' => 'Верхнее меню',
 	'bottom' => 'Нижнее меню'
 ) );
-//-------------создаем класс меню
-class Custom_Walker_Nav_Menu extends Walker_Nav_menu {
-	public function start_el(&$output, $item, $depth = 0, $args = array(), $id = 0) {
-		$output .= "Link - ".$depth;
-	}
-	public function end_el(&$output, $item, $depth = 0, $args = array()) {
 
-	}
-	public function start_lvl(&$output, $depth = 0, $args = array()) {
-		$output .= "<ul>";
-	}
-	public function end_lvl(&$output, $depth = 0, $args = array()) {
-		$output .= "</ul>";
-	}
-}
+
+//-------------подключаем класс меню
+
+include "inc/Custom_Walker_Nav_Menu.php";
