@@ -198,6 +198,9 @@ function my_options() {
 	add_settings_field('button_slide', 'Заголовок кнопки слайдера', 'display_button', 'general');
 	register_setting('general', 'button_slide');
 
+	add_settings_field('top_logo', 'Логотип', 'logo_text', 'general');
+	register_setting('general', 'top_logo'); 
+
 	add_settings_field('my_phone', 'Телефон', 'display_phone', 'discussion');
 	register_setting('discussion', 'my_phone');
 
@@ -211,6 +214,9 @@ function display_button() {
 }
 function display_phone() {
 	echo '<input type="text" class="regular-text" name="my_phone" value="'.esc_attr(get_option('my_phone')).'">';
+}
+function logo_text() {
+	echo '<input type="text" class="regular-text" name="top_logo" value="'.esc_attr(get_option('top_logo')).'">';
 }
 
 add_action('admin_menu', 'my_options');

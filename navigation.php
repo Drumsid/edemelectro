@@ -9,7 +9,7 @@
 		        <span class="icon-bar"></span>
 	        </button>
 				<div class="logo">
-					<h1><a href="index.html"><span>E</span> -Shop</a></h1>
+					<h1><a href="index.html"><span>E</span> <?php echo get_option('top_logo');?></a></h1>
 				</div>
 	    </div>
 	    <!--/.navbar-header-->
