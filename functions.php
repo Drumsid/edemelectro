@@ -182,6 +182,8 @@ function load_styles_scripts() {
 
 	wp_enqueue_script('bootstrap-3.1.1.min', get_template_directory_uri().'/js/bootstrap-3.1.1.min.js');
 	wp_enqueue_script('simpleCart', get_template_directory_uri().'/js/simpleCart.min.js');
+	wp_enqueue_script('responsiveslides', get_template_directory_uri().'/js/responsiveslides.min.js');
+	wp_enqueue_script('flexisel', get_template_directory_uri().'/js/jquery.flexisel.js');
 }
 
 add_action('wp_enqueue_scripts', 'load_styles_scripts');
