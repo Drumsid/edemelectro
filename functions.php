@@ -220,3 +220,19 @@ function logo_text() {
 }
 
 add_action('admin_menu', 'my_options');
+
+add_action('init', 'banner_index');
+function banner_index() {
+	register_post_type('slider', array(
+		'public'=>true,
+		'supports' => array('title', 'editor', 'thumbnail'),
+		'menu_position' => 120,
+		'menu_icon' => admin_url().'images/media-button-other.gif',
+		'labels' => array(
+			'name' => 'Слайдер',
+			'all_items' => 'Все слайды',
+			'add_new' => 'Добавить новый слайд',
+			'add_new_item' => 'Новый слайд'
+		)
+	));
+}
