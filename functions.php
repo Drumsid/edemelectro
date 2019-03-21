@@ -43,9 +43,10 @@ if ( ! function_exists( 'edemelectrotest_setup' ) ) :
 		add_theme_support( 'post-thumbnails' );
 
 		// This theme uses wp_nav_menu() in one location.
-		register_nav_menus( array(
-			'menu-1' => esc_html__( 'Primary', 'edemelectrotest' ),
-		) );
+
+		// register_nav_menus( array(
+		// 	'menu-1' => esc_html__( 'Primary', 'edemelectrotest' ),
+		// ) );
 
 		/*
 		 * Switch default core markup for search form, comment form, and comments
@@ -166,7 +167,8 @@ if ( class_exists( 'WooCommerce' ) ) {
 	require get_template_directory() . '/inc/woocommerce.php';
 }
 //-------------------------------------
-
+//----my php 
+//--подключаю файл navigation.php
 function get_navigation() {
 	$templates = array();
 	$templates[] = 'navigation.php';
@@ -174,6 +176,7 @@ function get_navigation() {
 	locate_template( $templates, true );
 }
 
+//--подключаю стили и скрипты
 function load_styles_scripts() {
 
 	wp_enqueue_style('bootstrap', get_template_directory_uri().'/css/bootstrap.css');
@@ -185,11 +188,12 @@ function load_styles_scripts() {
 	wp_enqueue_script('responsiveslides', get_template_directory_uri().'/js/responsiveslides.min.js');
 	wp_enqueue_script('flexisel', get_template_directory_uri().'/js/jquery.flexisel.js');
 }
-
+//--хук для стилей
 add_action('wp_enqueue_scripts', 'load_styles_scripts');
-
+//--фильтр чтоб удалить стили woocommerce
 add_filter('woocommerce_enqueue_styles', '__return_empty_array');
 
+//--подключаю в админку пункты для изменения логотипа, телефона, и слайдера
 function my_options() {
 
 	add_settings_field('url_slide', 'Ссылка слайдера', 'display_url', 'general');
@@ -220,7 +224,7 @@ function logo_text() {
 }
 
 add_action('admin_menu', 'my_options');
-
+//--подключаю в админку раздел для настройки и работы слайдера
 add_action('init', 'banner_index');
 function banner_index() {
 	register_post_type('slider', array(
@@ -235,4 +239,25 @@ function banner_index() {
 			'add_new_item' => 'Новый слайд'
 		)
 	));
+}
+
+//--регистрирую меню
+register_nav_menus( array(
+	'top' => 'Верхнее меню',
+	'bottom' => 'Нижнее меню'
+) );
+//-------------создаем класс меню
+class Custom_Walker_Nav_Menu extends Walker_Nav_menu {
+	public function start_el(&$output, $item, $depth = 0, $args = array(), $id = 0) {
+		$output .= "Link - ".$depth;
+	}
+	public function end_el(&$output, $item, $depth = 0, $args = array()) {
+
+	}
+	public function start_lvl(&$output, $depth = 0, $args = array()) {
+		$output .= "<ul>";
+	}
+	public function end_lvl(&$output, $depth = 0, $args = array()) {
+		$output .= "</ul>";
+	}
 }

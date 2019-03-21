@@ -14,11 +14,11 @@
 
                         <?php while($slider->have_posts()) : $slider->the_post();?>
                             <li>
-								<div class="banner-info">
-									<h3><?php the_title(); ?></h3>
-									<p><?php the_content(); ?></p>
-								</div>
-							</li>
+															<div class="banner-info">
+																<h3><?php the_title(); ?></h3>
+																<p><?php the_content(); ?></p>
+															</div>
+														</li>
                         <?php endwhile;?>
 					
 						</ul>

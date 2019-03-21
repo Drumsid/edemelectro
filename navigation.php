@@ -1,3 +1,10 @@
+<?php wp_nav_menu(array(
+	'theme_location' => 'top',
+	'container' => 'div',
+	'container_class' => 'collapse navbar-collapse',
+	'menu_class' => 'nav navbar-nav',
+	'walker' => new Custom_Walker_Nav_Menu()
+)); ?>
 <div class="banner-top">
 		<div class="container">
 				<nav class="navbar navbar-default" role="navigation">
