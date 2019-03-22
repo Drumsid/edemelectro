@@ -7,19 +7,24 @@
 		<div class="container">
 			<div class="main-content">
 				<div class="online-strip">
+				<?php if ( function_exists('dynamic_sidebar') ) :?>
 					<div class="col-md-4 follow-us">
-						<h3>follow us : <a class="twitter" href="#"></a><a class="facebook" href="#"></a></h3>
+						<?php dynamic_sidebar('follow us'); ?>
 					</div>
+				<?php endif; ?>
+				<?php if ( function_exists('dynamic_sidebar') ) :?>
 					<div class="col-md-4 shipping-grid">
-						<div class="shipping">
-							<img src="<?php bloginfo('template_directory'); ?>/images/shipping.png" alt="" />
-						</div>
+						<?php dynamic_sidebar('shipping'); ?>
+							<!-- <div class="shipping">
+								<img src="<?php// bloginfo('template_directory'); ?>/images/shipping.png" alt="" />
+							</div>
 						<div class="shipping-text">
 							<h3>Free Shipping</h3>
 							<p>on orders over $ 199</p>
 						</div>
-						<div class="clearfix"></div>
+						<div class="clearfix"></div> -->
 					</div>
+					<?php endif; ?>
 					<div class="col-md-4 online-order">
 						<p>Order online</p>
 						<h3>Tel:<?php echo get_option('my_phone');?></h3>
