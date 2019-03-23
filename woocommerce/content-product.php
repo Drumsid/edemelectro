@@ -23,7 +23,7 @@ global $product;
 
     <?php do_action('woocommerce_shop_loop_item_title'); ?>
 
-    <?php do_action('woocommerce_after_shop_loop_item_title'); ?>
+     <!-- do_action('woocommerce_after_shop_loop_item_title'); убрал блок цена на главной в last product -->
 
     <?php do_action('woocommerce_after_shop_loop_item'); ?>
 

@@ -298,3 +298,14 @@ if ( ! function_exists( 'woocommerce_output_content_wrapper_end' ) ) {
 		wc_get_template( 'global/wrapper-end.php' );
 	}
 }
+//---------------------------
+
+function woocommerce_template_loop_product_thumbnail() {
+	echo woocommerce_get_product_thumbnail();
+
+	echo '</a><div class="mask"><a href="'.get_the_permalink().'">Quick View</a></div>';
+}
+
+function woocommerce_template_loop_product_title() {
+	echo '<a class="product_name" href="'.get_the_permalink().'">'.get_the_title().'</a>';
+}

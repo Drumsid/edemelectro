@@ -39,12 +39,22 @@
 
 				<?php 
 				$args = array(
-					'post_type' => 'product',
-					'post_per_page' => 6,
+					//'post_type' => 'product',
+					//'category_name' => 'retro',
+					//'post_per_page' => 9
 					// 'meta_key' => '_featured',
 					// 'meta_value' => 'yes'
+					//'numberposts' => -1,
+					'posts_per_page' => 9,
+					'orderby' => 'date',
+					'order' => 'ASC',
+					'post_type' => 'product',
+					//'product_cat' => 'retro'
 				);
-				
+
+			//	$term = get_term_by( 'slug', get_query_var( 'term' ), get_query_var( 'taxonomy' ) );
+			//	print_r($term); //выводит все данные о странице слаг категорию Id и тп
+
 				global $wp_query;
 
 				$wp_query = new WP_Query($args);
