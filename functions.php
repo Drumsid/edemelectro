@@ -273,3 +273,28 @@ function MyTempl_widgets_init() {
 	));
 }
 add_action('widgets_init', 'MyTempl_widgets_init');
+
+//------------------------
+//добавил эти две строчки чтоб заработали файлы из моей папки global, такая же папка есть в директории woocommerce
+remove_action('woocommerce_before_main_content', 'woocommerce_breadcrumb', 20 );
+add_action( 'woocommerce_before_main_content', 'woocommerce_output_content_wrapper', 20 );
+
+// закоментил такую же функцию в файле wc_template_functions.php 
+if ( ! function_exists( 'woocommerce_output_content_wrapper' ) ) {
+
+	/**
+	 * Output the start of the page wrapper.
+	 */
+	function woocommerce_output_content_wrapper() {
+		wc_get_template( 'global/wrapper-start.php' );
+	}
+}
+if ( ! function_exists( 'woocommerce_output_content_wrapper_end' ) ) {
+
+	/**
+	 * Output the end of the page wrapper.
+	 */
+	function woocommerce_output_content_wrapper_end() {
+		wc_get_template( 'global/wrapper-end.php' );
+	}
+}
