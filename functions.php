@@ -298,7 +298,7 @@ if ( ! function_exists( 'woocommerce_output_content_wrapper_end' ) ) {
 		wc_get_template( 'global/wrapper-end.php' );
 	}
 }
-//---------------------------
+//---------------------------добавляем разметку в блок last product
 
 function woocommerce_template_loop_product_thumbnail() {
 	echo woocommerce_get_product_thumbnail();
@@ -309,3 +309,13 @@ function woocommerce_template_loop_product_thumbnail() {
 function woocommerce_template_loop_product_title() {
 	echo '<a class="product_name" href="'.get_the_permalink().'">'.get_the_title().'</a>';
 }
+//---------------------перемещаем кнопку распродажа в блоке last product_cat
+
+function change__sale_flash() {
+
+	$html = '<div class="offer otop"><p>40%</p><smal>Sale</smal></div>';
+
+	return $html;
+}
+
+add_filter('woocommerce_sale_flash','change__sale_flash'); 
