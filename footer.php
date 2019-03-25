@@ -16,7 +16,9 @@
 		<div class="container">
 		 <div class="footer_top">
 			<div class="span_of_4">
-				<div class="col-md-3 span1_of_4">
+
+			<?php dynamic_sidebar('footer'); ?>
+				<!-- <div class="col-md-3 span1_of_4">
 					<h4>Shop</h4>
 					<ul class="f_nav">
 						<li><a href="#">new arrivals</a></li>
@@ -67,9 +69,9 @@
 						<li><a href="#">login</a></li>
 						<li><a href="#">brands</a></li>
 					</ul>			
-				</div>
+				</div> -->
 				<div class="clearfix"></div>
-				</div>
+			</div>
 		  </div>
 		  <div class="cards text-center">
 				<img src="<?php bloginfo('template_directory'); ?>/images/cards.jpg" alt="" />

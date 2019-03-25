@@ -280,6 +280,16 @@ function MyTempl_widgets_init() {
 		// 'before_widget' => "",
 		// 'after_widget' => ""
 	));
+
+	register_sidebar(array(
+		'name' => 'Footer menu',
+		'id' => 'footer',
+		'description' => "Блок для отображения нижнего меню",
+		'before_widget' => '<div class="col-md-3 span1_of_4">',
+		'after_widget' => "</div>",
+		'before_title' => "<h4>",
+		'after_title' => "</h4>"
+	));
 }
 add_action('widgets_init', 'MyTempl_widgets_init');
 
@@ -329,4 +339,14 @@ function change__sale_flash() {
 
 add_filter('woocommerce_sale_flash','change__sale_flash'); 
 
-//----виджет делаю с нуля
+//----фильтр для меню футера
+
+add_filter('widget_nav_menu_args', 'change_menu', '', 4);
+
+function change_menu($nav_menu_args, $nav_menu, $args, $instance){
+	
+	$nav_menu_args['container'] = "";
+	$nav_menu_args['menu_class'] = "f_nav";
+	
+	return $nav_menu_args;
+}
