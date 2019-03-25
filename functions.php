@@ -251,6 +251,7 @@ register_nav_menus( array(
 //-------------подключаем класс меню
 
 include "inc/Custom_Walker_Nav_Menu.php";
+include "inc/fcollection/widget.php";
 
 
 //-------------подключаем виджет соцсетей и доставки, можно добавить виджет телефон
@@ -270,6 +271,14 @@ function MyTempl_widgets_init() {
 		'description' => "Блок для доставки",
 		'before_widget' => "",
 		'after_widget' => ""
+	));
+
+	register_sidebar(array(
+		'name' => 'Content bottom',
+		'id' => 'content_bottom',
+		'description' => "Блок для отображения нижнего слайдера",
+		// 'before_widget' => "",
+		// 'after_widget' => ""
 	));
 }
 add_action('widgets_init', 'MyTempl_widgets_init');
@@ -319,3 +328,5 @@ function change__sale_flash() {
 }
 
 add_filter('woocommerce_sale_flash','change__sale_flash'); 
+
+//----виджет делаю с нуля
