@@ -1,11 +1,11 @@
 <div class="news-letter">
 			<div class="container">
 				<div class="join">
-					<h6>JOIN OUR MAILING LIST</h6>
+					<h6>ПОИСК ПО МАГАЗИНУ</h6>
 					<div class="sub-left-right">
 						<form>
-							<input type="text" value="Enter Your Email Here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter Your Email Here';}" />
-							<input type="submit" value="SUBSCRIBE" />
+							<input name="s" type="text" value="Введите ваш запрос" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'ВВЕДИТЕ ВАШ ЗАПРОС';}" />
+							<input type="submit" value="ПОИСК" />
 						</form>
 					</div>
 					<div class="clearfix"> </div>
@@ -81,5 +81,6 @@
 		  </div>
 		</div>
 		</div>
+		<?php wp_footer() ?>
 </body>
 </html>

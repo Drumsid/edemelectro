@@ -350,3 +350,11 @@ function change_menu($nav_menu_args, $nav_menu, $args, $instance){
 	
 	return $nav_menu_args;
 }
+
+//---функция подлючает скрипт add-to-cart.js
+
+add_action('wp_enqueue_scripts','load_script',9);
+
+function load_script() {
+	wp_enqueue_script('wc-add-to-cart',get_template_directory_uri().'/js/add-to-cart.js', WC_VERSION, true);
+}
