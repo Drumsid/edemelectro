@@ -290,6 +290,16 @@ function MyTempl_widgets_init() {
 		'before_title' => "<h4>",
 		'after_title' => "</h4>"
 	));
+
+	register_sidebar(array(
+		'name' => 'Left bar',
+		'id' => 'left_sidebar',
+		'description' => "Блок для отображения левого меню",
+		'before_widget' => '',
+		'after_widget' => "",
+		'before_title' => "",
+		'after_title' => ""
+	));
 }
 add_action('widgets_init', 'MyTempl_widgets_init');
 
@@ -345,6 +355,14 @@ add_filter('widget_nav_menu_args', 'change_menu', '', 4);
 
 function change_menu($nav_menu_args, $nav_menu, $args, $instance){
 	
+	if($args['id'] == 'left_sidebar') {
+
+		$nav_menu_args['container'] = "";
+		$nav_menu_args['menu_class'] = "product-list";
+
+		return $nav_menu_args;
+	}
+
 	$nav_menu_args['container'] = "";
 	$nav_menu_args['menu_class'] = "f_nav";
 	
@@ -357,4 +375,26 @@ add_action('wp_enqueue_scripts','load_script',9);
 
 function load_script() {
 	wp_enqueue_script('wc-add-to-cart',get_template_directory_uri().'/js/add-to-cart.js', WC_VERSION, true);
+}
+
+//----функция для left menu что сменить обертку div
+
+add_filter('dynamic_sidebar_params','check_sidebar_params');
+
+function check_sidebar_params($params) {
+
+	global $wp_registered_widgets;
+	
+	if($params[0]['id'] == 'left_sidebar' && $params[0]['widget_id'] == 'nav_menu-'.$params[1]['number']) {
+		$params[0]['before_widget'] = '<div class="product-listy">';
+		$params[0]['after_widget'] = '</div>';
+		$params[0]['before_title'] = '<h2>';
+		$params[0]['after_title'] = '</h2>';
+	}
+	elseif ($params[0]['id'] == 'left_sidebar' && $params[0]['widget_id'] == 'custom_html-'.$params[1]['number']) {
+		$params[0]['before_widget'] = '<div class="latest-bis">';
+		$params[0]['after_widget'] = '</div>';
+	}
+	//print_r($params);
+	return $params;
 }

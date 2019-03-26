@@ -1,6 +1,11 @@
-
+<?php if(is_front_page()) :?>
 <div class="banner-top">
 		<div class="container">
+			<?php else : ?>
+				<div class="inner-banner">
+					<div class="container">
+						<div class="banner-top inner-head">
+							<?php endif; ?>
 				<nav class="navbar navbar-default" role="navigation">
 					<div class="navbar-header">
 						<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
@@ -10,7 +15,7 @@
 							<span class="icon-bar"></span>
 						</button>
 							<div class="logo">
-								<h1><a href="http://edem.loc/"><span>E</span> <?php echo get_option('top_logo');?></a></h1>
+								<h1><a href="<?php echo get_home_url(); ?>"><span>E</span> <?php echo get_option('top_logo');?></a></h1>
 							</div>
 					</div>
 					<!--/.navbar-header-->
@@ -28,3 +33,6 @@
 		<!--/.navbar-->
 		</div>
 </div>
+	<?php if(!is_front_page()) : ?>
+		</div>
+	<?php endif;?>
