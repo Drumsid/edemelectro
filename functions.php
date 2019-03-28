@@ -181,6 +181,9 @@ function load_styles_scripts() {
 
 	wp_enqueue_style('bootstrap', get_template_directory_uri().'/css/bootstrap.css');
 	wp_enqueue_style('style', get_template_directory_uri().'/css/style.css');
+	if(!is_shop()) {
+		wp_enqueue_style('component', get_template_directory_uri().'/css/component.css');
+	}
 	wp_enqueue_style('flexslider', get_template_directory_uri().'/css/flexslider.css');
 
 	wp_enqueue_script('bootstrap-3.1.1.min', get_template_directory_uri().'/js/bootstrap-3.1.1.min.js');
@@ -397,4 +400,17 @@ function check_sidebar_params($params) {
 	}
 	//print_r($params);
 	return $params;
+}
+
+//---вывод товаров в категориях
+
+if(!is_shop()) {
+
+	remove_action('woocommerce_before_shop_loop_item', 'woocommerce_template_loop_product_link_open');
+
+	add_action( 'woocommerce_before_shop_loop_item', 'mytempl_loop_product_link_open', 10 );
+}
+
+function mytempl_loop_product_link_open() {
+	echo '<a class="cbp-vm-image" href="single.html">';
 }
