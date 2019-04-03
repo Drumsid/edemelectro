@@ -16,6 +16,8 @@ get_navigation();
            <?php get_sidebar();?>
 			
 			<div class="new-product">
+			
+				
 				<div class="new-product-top">
 					<ul class="product-top-list">
 						<li><a href="index.html">Home</a>&nbsp;<span>&gt;</span></li>

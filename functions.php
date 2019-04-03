@@ -308,8 +308,11 @@ add_action('widgets_init', 'MyTempl_widgets_init');
 
 //------------------------
 //добавил эти две строчки чтоб заработали файлы из моей папки global, такая же папка есть в директории woocommerce
-remove_action('woocommerce_before_main_content', 'woocommerce_breadcrumb', 20 );
-add_action( 'woocommerce_before_main_content', 'woocommerce_output_content_wrapper', 20 );
+
+	remove_action('woocommerce_before_main_content', 'woocommerce_breadcrumb', 20 );// удаляет крошки
+	add_action( 'woocommerce_before_main_content', 'woocommerce_output_content_wrapper', 20 );
+
+
 
 // закоментил такую же функцию в файле wc_template_functions.php 
 if ( ! function_exists( 'woocommerce_output_content_wrapper' ) ) {
@@ -318,6 +321,7 @@ if ( ! function_exists( 'woocommerce_output_content_wrapper' ) ) {
 	 * Output the start of the page wrapper.
 	 */
 	function woocommerce_output_content_wrapper() {
+		
 		wc_get_template( 'global/wrapper-start.php' );
 	}
 }
@@ -333,13 +337,41 @@ if ( ! function_exists( 'woocommerce_output_content_wrapper_end' ) ) {
 //---------------------------добавляем разметку в блок last product
 
 function woocommerce_template_loop_product_thumbnail() {
-	echo woocommerce_get_product_thumbnail();
 
-	echo '</a><div class="mask"><a href="'.get_the_permalink().'">Quick View</a></div>';
+	if(!is_shop()) {?>
+
+		<div class="simpleCart_shelfItem">
+		<div class="view view-first">
+		<div class="inner_content clearfix">
+		<div class="product_image">
+
+	<?php
+
+		echo mytempl_get_product_thumbnail(); ?>
+		<img src="images/p1.jpg" class="img-responsive" alt=""/>
+			<div class="mask">
+			    <div class="info">Quick View</div>
+			</div>
+
+		 <?php
+
+	} else {
+		echo woocommerce_get_product_thumbnail();
+		echo '</a><div class="mask"><a href="'.get_the_permalink().'">Quick View</a></div>';
+	}
+	
 }
 
 function woocommerce_template_loop_product_title() {
-	echo '<a class="product_name" href="'.get_the_permalink().'">'.get_the_title().'</a>';
+
+	if(!is_shop()) {
+
+		echo '<div class="product_container"><div class="cart-left"><p class="title">'.get_the_title().'</p></div>';
+
+	} else {
+		echo '<a class="product_name" href="'.get_the_permalink().'">'.get_the_title().'</a>';
+	}
+	
 }
 //---------------------перемещаем кнопку распродажа в блоке last product_cat
 
@@ -414,3 +446,47 @@ if(!is_shop()) {
 function mytempl_loop_product_link_open() {
 	echo '<a class="cbp-vm-image" href="single.html">';
 }
+
+//-----
+
+if ( ! function_exists( 'mytempl_get_product_thumbnail' ) ) {
+
+	/**
+	 * Get the product thumbnail, or the placeholder if not set.
+	 *
+	 * @subpackage	Loop
+	 * @param string $size (default: 'shop_catalog')
+	 * @param int $deprecated1 Deprecated since WooCommerce 2.0 (default: 0)
+	 * @param int $deprecated2 Deprecated since WooCommerce 2.0 (default: 0)
+	 * @return string
+	 */
+	function mytempl_get_product_thumbnail( $size = 'shop_catalog', $deprecated1 = 0, $deprecated2 = 0 ) {
+		global $post;
+		$image_size = apply_filters( 'single_product_archive_thumbnail_size', $size );
+
+		if ( has_post_thumbnail() ) {
+			$props = wc_get_product_attachment_props( get_post_thumbnail_id(), $post );
+			return get_the_post_thumbnail( $post->ID, $image_size, array(
+				'class'	 => 'img-responsive',
+				'alt'    => $props['alt'],
+			) );
+		} elseif ( wc_placeholder_img_src() ) {
+			return wc_placeholder_img( $image_size );
+		}
+	}
+}
+
+//---
+
+function change_rub_symbol() {
+	return 'руб.';
+}
+add_filter( 'woocommerce_currency_symbol', 'change_rub_symbol');
+//remove_action( 'woocommerce_after_shop_loop_item_title', 'woocommerce_template_loop_rating');
+									
+
+//----
+
+// add_action( 'woocommerce_before_main_content', 'woocommerce_breadcrumb', 20  );
+		
+?>
